@@ -1,0 +1,10 @@
+version: '3'
+services:
+  server:
+    container_name: shell-example
+    build: .
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - 5555:80
