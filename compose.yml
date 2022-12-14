@@ -1,9 +1,12 @@
 services:
   server:
-    container_name: c-example
+    container_name: cgi-scripts
     build: .
     restart: always
     stdin_open: true
     tty: true
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     ports:
       - 8888:80
