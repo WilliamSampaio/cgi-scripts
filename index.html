@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGI</title>
+    <style>
+        body {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        p {
+            text-align: justify;
+        }
+
+        figure {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>CGI Scripts</h1>
+    <h2>What the hell is CGI?</h2>
+    <p>Common Gateway Interface (CGI) is an interface specification that enables web servers to execute an external program, typically to process user requests.</p>
+    <p>Such programs are often written in a scripting language and are commonly referred to as CGI scripts, but they may include compiled programs.</p>
+    <p>A typical use case occurs when a web user submits a web form on a web page that uses CGI. The form's data is sent to the web server within an HTTP request with a URL denoting a CGI script. The web server then launches the CGI script in a new computer process, passing the form data to it. The output of the CGI script, usually in the form of HTML, is returned by the script to the Web server, and the server relays it back to the browser as its response to the browser's request.</p>
+    <p>Developed in the early 1990s, CGI was the earliest common method available that allowed a web page to be interactive.</p>
+    <br>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Common_Gateway_Interface_logo.svg/220px-Common_Gateway_Interface_logo.svg.png" alt=""><br>
+        <caption>The official CGI logo from the spec announcement</caption>
+    </figure>
+    <h2>Example</h2>
+    <p>In this simple example I showed how the CGI is capable of executing scripts/programs in different technologies. For this I used the following technologies:</p>
+    <ul>
+        <li>
+            <h3><a href="https://redmine.lighttpd.net/" target="_blank">Lighttpd Webserver</a></h3>
+            <p>lighttpd is a secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments. It has a very low memory footprint compared to other webservers and takes care of cpu-load. Its advanced feature-set (FastCGI, CGI, Auth, Output-Compression, URL-Rewriting and many more) make lighttpd the perfect webserver-software for every server that suffers load problems.</p>
+        </li>
+        <li>
+            <h3><a href="https://docs.docker.com/" target="_blank">Docker/Docker Compose</a></h3>
+            <p>Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers. The service has both free and premium tiers. The software that hosts the containers is called Docker Engine. It was first started in 2013 and is developed by Docker, Inc.</p>
+        </li>
+    </ul>
+    <h2>Try It Yourself!</h2>
+    <p>Just click on the links below and see for yourself!</p>
+    <ul>
+        <li><a href="/cgi-bin/script_c.cgi" target="_blank"><strong>CGI with C Program</strong></a></li>
+        <li><a href="/cgi-bin/script_sh.cgi" target="_blank"><strong>CGI with Shell Script</strong></a></li>
+    </ul>
+</body>
+</html>
