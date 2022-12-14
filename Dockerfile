@@ -1,15 +1,17 @@
 FROM sebp/lighttpd
 # install dependencies
 RUN apk update
-RUN apk add gcc libc-dev
+RUN apk add gcc libc-dev dotnet6-sdk
 # copy scripts folder
 COPY ./scripts /scripts
-# compile the C program
-RUN gcc /scripts/script.c -o /scripts/script_c.cgi
-# copy lighttpd config file
-COPY ./lighttpd.conf /etc/lighttpd/lighttpd.conf
 # create CGI script folder
 RUN mkdir /var/www/cgi-bin -p
+# compile the C program
+RUN gcc /scripts/script.c -o /scripts/script_c.cgi
+# compile the C# program
+RUN dotnet build /scripts/script.cs -o /var/www/cgi-bin/script_csharp
+# copy lighttpd config file
+COPY ./lighttpd.conf /etc/lighttpd/lighttpd.conf
 # copy the scripts
 RUN cp /scripts/script_c.cgi /var/www/cgi-bin/script_c.cgi
 RUN cp /scripts/script.sh /var/www/cgi-bin/script_sh.cgi
