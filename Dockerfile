@@ -1,7 +1,7 @@
 FROM sebp/lighttpd
 # install dependencies
 RUN apk update
-RUN apk add gcc libc-dev dotnet6-sdk python3
+RUN apk add gcc libc-dev dotnet6-sdk python3 perl
 RUN ln -sf python3 /usr/bin/python
 # copy scripts folder
 COPY ./scripts /scripts
@@ -15,10 +15,12 @@ RUN dotnet build /scripts/script.cs -o /var/www/cgi-bin/script_csharp
 COPY ./lighttpd.conf /etc/lighttpd/lighttpd.conf
 # copy the scripts
 RUN cp /scripts/script_c.cgi /var/www/cgi-bin/script_c.cgi
+RUN cp /scripts/script.pl /var/www/cgi-bin/script_pl.cgi
 RUN cp /scripts/script.py /var/www/cgi-bin/script.py
 RUN cp /scripts/script.sh /var/www/cgi-bin/script_sh.cgi
 # grant execute permission
 RUN chmod +x /var/www/cgi-bin/script_c.cgi
+RUN chmod +x /var/www/cgi-bin/script_pl.cgi
 RUN chmod +x /var/www/cgi-bin/script.py
 RUN chmod +x /var/www/cgi-bin/script_sh.cgi
 # remove the unused folder
