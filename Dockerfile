@@ -11,6 +11,8 @@ RUN apk add python3
 RUN apk add perl
 # install Ruby
 RUN apk add ruby
+# install Lua
+RUN apk add lua5.3
 # copy scripts folder
 COPY ./scripts /scripts
 # create CGI script folder
@@ -24,12 +26,14 @@ COPY ./lighttpd.conf    /etc/lighttpd/lighttpd.conf
 COPY ./mod_cgi.conf     /etc/lighttpd/mod_cgi.conf
 # copy the scripts
 RUN cp /scripts/script.cgi  /var/www/localhost/cgi-bin/script.cgi
+RUN cp /scripts/script.lua  /var/www/localhost/cgi-bin/script.lua
 RUN cp /scripts/script.pl   /var/www/localhost/cgi-bin/script.pl
 RUN cp /scripts/script.py   /var/www/localhost/cgi-bin/script.py
 RUN cp /scripts/script.rb   /var/www/localhost/cgi-bin/script.rb
 RUN cp /scripts/script.sh   /var/www/localhost/cgi-bin/script.sh
 # grant execute permission
 RUN chmod g+x /var/www/localhost/cgi-bin/script.cgi
+RUN chmod g+x /var/www/localhost/cgi-bin/script.lua
 RUN chmod g+x /var/www/localhost/cgi-bin/script.pl
 RUN chmod g+x /var/www/localhost/cgi-bin/script.py
 RUN chmod g+x /var/www/localhost/cgi-bin/script.rb
