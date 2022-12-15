@@ -1,6 +1,7 @@
 FROM sebp/lighttpd
 # install dependencies
 RUN apk update
+RUN apk add jq
 # install C
 RUN apk add gcc libc-dev
 # install C# (.NET 6)
@@ -45,6 +46,9 @@ RUN chmod g+x /var/www/localhost/cgi-bin/script.sh
 # remove the unused folder
 RUN rm -rf /scripts
 # copy the index
-COPY ./index.html /var/www/localhost/htdocs/index.html
+COPY index.html /var/www/localhost/htdocs/index.html
+COPY console.html /var/www/localhost/htdocs/console.html
+COPY console.sh /var/www/localhost/cgi-bin/console.sh
+RUN chmod g+x /var/www/localhost/cgi-bin/console.sh
 # init the webserver
 CMD ["sh", "/usr/local/bin/start.sh"]
