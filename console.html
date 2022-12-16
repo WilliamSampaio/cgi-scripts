@@ -46,6 +46,8 @@
         var origin = window.location.origin
         $("#cmdinput").submit(function (e) {
             e.preventDefault()
+            $("#cmdln").blur()
+            $("#btnSendCmd").empty().append('Enviar <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>').prop('disabled', true)
             var form = $(this)
             $.ajax({
                 url: origin + '/cgi-bin/console.sh',
@@ -59,7 +61,8 @@
                     $("#return").empty().append("<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error " + xhr.status + "</strong>: " + thrownError + " " + xhr.responseText + "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>")
                 }
             }).done(function () {
-                $("#cmdln").val('')
+                $("#cmdln").val('').focus()
+                $("#btnSendCmd").empty().append('Enviar').prop('disabled', false)
                 window.scrollBy(0, 10000)
             })
         })
