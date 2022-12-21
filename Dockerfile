@@ -1,7 +1,11 @@
+# Rust build stage
+FROM rust:alpine AS rust
+COPY ./scripts/script.rs /script
+RUN cd /script && cargo build --release
+
 FROM sebp/lighttpd
 # install dependencies
 RUN apk update
-RUN apk add jq
 # install C
 RUN apk add gcc libc-dev
 # install C# (.NET 6)
@@ -24,6 +28,8 @@ RUN mkdir /var/www/localhost/cgi-bin -p
 RUN gcc /scripts/script.c -o /scripts/script.cgi
 # compile the C# program
 RUN dotnet build /scripts/script.cs -o /var/www/localhost/cgi-bin/script_csharp
+# copy executable compiled from build stage
+COPY --from=rust ./script/target/release /var/www/localhost/cgi-bin/script_rust
 # copy lighttpd config file
 COPY ./lighttpd.conf    /etc/lighttpd/lighttpd.conf
 COPY ./mod_cgi.conf     /etc/lighttpd/mod_cgi.conf
